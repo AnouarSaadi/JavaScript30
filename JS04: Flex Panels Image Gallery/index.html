@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Flex Panels Image Gallery</title>
+        <link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+        <style>
+            html {
+                box-sizing: border-box;
+                background: #ffc600;
+                font-family: 'helvetica neue';
+                font-size: 20px;
+                font-weight: 200;
+            }
+            
+            body {
+            margin: 0;
+            }
+            *, *:before, *:after {
+                box-sizing: inherit;
+            }
+            .panels {
+                min-height: 100vh;
+                overflow: hidden;
+                display: flex;
+            }
+            .panel {
+                text-align: center;
+                align-items: center;
+                box-shadow: inset 0 0 0 5px rgba(255,255,255,0.1);
+                font-size: 24px;
+                transition:
+                    font-size 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+                    flex 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+                    background 0.2s;
+                color: white;
+                background-size: cover;
+                background-position: center;
+                flex: 1;
+                justify-content: center;
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+            }
+            .panel1 {background-image:url('/Users/asaadi/Desktop/JavaScript30/JS04: Flex Panels Image Gallery/pexels-fiona-art.jpeg'); }
+            .panel2 {background-image:url('/Users/asaadi/Desktop/JavaScript30/JS04: Flex Panels Image Gallery/pexels-martin-péchy.jpeg'); }
+            .panel3 {background-image:url('/Users/asaadi/Desktop/JavaScript30/JS04: Flex Panels Image Gallery/pexels-pratik-gupta.jpeg'); }
+            .panel4 {background-image:url('/Users/asaadi/Desktop/JavaScript30/JS04: Flex Panels Image Gallery/pexels-sean-patrick.jpeg'); }
+            /* flex items */
+            .panel > * {
+                margin: 0;
+                width: 100%;
+                transition: transform 0.5s;
+                flex: 1 0 auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .panel > *:first-child { transform: translateY(-100%); }
+            .panel.open-active > *:first-child { transform: translateY(0); }
+            .panel > *:last-child { transform: translateY(100%); }
+            .panel.open-active > *:last-child { transform: translateY(0); }
+
+            .panel p {
+                text-transform: uppercase;
+                font-family: "Amatic SC", cursive;
+                text-shadow: 0 0 4px rgba(0,0,0,0.72), 0 0 14px rgba(0,0,0,0.45);
+                font-size: 2em;
+            }
+
+            .panel.open {
+                flex: 5;
+                font-size: 40px;
+                text-decoration: none;
+            }
+        </style>
+
+        <div class="panels">
+            <div class="panel panel1">
+                <p>Hey</p>
+                <p>Let's</p>
+                <p>Dance</p>
+            </div>
+            <div class="panel panel2">
+                <p>Give</p>
+                <p>Fake</p>
+                <p>Receive</p>
+            </div>
+            <div class="panel panel3">
+                <p>Hello</p>
+                <p>World</p>
+                <p>#!#!#</p>
+            </div>
+            <div class="panel panel4">
+                <p>Flex</p>
+                <p>Image</p>
+                <p>Gallery</p>
+            </div>
+        </div>
+        <script>
+
+            const panels = document.querySelectorAll('.panel');
+
+            function toggleOpen() {
+                this.classList.toggle('open');
+            }
+
+            function toggleActive(e) {
+                console.log(e.propertyName);
+                if (e.propertyName.includes('flex')) {
+                    this.classList.toggle('open-active');
+                }
+            }
+
+            panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+            panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
+
+        </script>
+    </body>
+</html>
